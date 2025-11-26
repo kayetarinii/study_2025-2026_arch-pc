@@ -1,0 +1,487 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  english,
+  russian,
+  12pt,
+  a4paper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{setspace}
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+\ifLuaTeX
+\usepackage[bidi=basic,provide=*]{babel}
+\else
+\usepackage[bidi=default,provide=*]{babel}
+\fi
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+\usepackage[backend=biber,langhook=extras,autolang=other*]{biblatex}
+\addbibresource{bib/cite.bib}
+
+\usepackage[]{csquotes}
+
+\KOMAoption{captions}{tableheading}
+\usepackage{indentfirst}
+\usepackage{float}
+\floatplacement{figure}{H}
+\usepackage{libertine}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Содержание}
+\else
+  \newcommand\contentsname{Содержание}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Список иллюстраций}
+\else
+  \newcommand\listfigurename{Список иллюстраций}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Список таблиц}
+\else
+  \newcommand\listtablename{Список таблиц}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Рисунок}
+\else
+  \newcommand\figurename{Рисунок}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Таблица}
+\else
+  \newcommand\tablename{Таблица}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Список}
+\newcommand*\listoflistings{\listof{codelisting}{Листинги}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Отчёт по лабораторной работе №8},
+  pdfauthor={Лобанова Екатерина Евгеньевна},
+  pdflang={ru-RU},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Отчёт по лабораторной работе №8}
+\author{Лобанова Екатерина Евгеньевна}
+\date{}
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Содержание}
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\listoffigures
+\listoftables
+
+\setstretch{1.5}
+\chapter{1. Цель
+работы}\label{ux446ux435ux43bux44c-ux440ux430ux431ux43eux442ux44b}
+
+Приобретение навыков написания программ с использованием циклов и
+обработкой аргументов командной строки.
+
+\chapter{2. Порядок выполнения лабораторной
+работы}\label{ux43fux43eux440ux44fux434ux43eux43a-ux432ux44bux43fux43eux43bux43dux435ux43dux438ux44f-ux43bux430ux431ux43eux440ux430ux442ux43eux440ux43dux43eux439-ux440ux430ux431ux43eux442ux44b}
+
+\section{Реализация циклов в
+NASM}\label{ux440ux435ux430ux43bux438ux437ux430ux446ux438ux44f-ux446ux438ux43aux43bux43eux432-ux432-nasm}
+
+Создаем каталог для программ ЛБ8, и в нем создаем файл lab8-1.asm.
+(\textbf{?@fig-001}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{./image/5276515452723071810.jpg.png}
+
+}
+
+\caption{Создаем каталог с помощью команды mkdir и файл командой touch}
+
+\end{figure}%
+
+Открываем файл и заполняем его в соответствии с листингом 8.1. Я
+использую команду nano. (\autocite[рис.][]{fig:002}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{./image/5276515452723071821.jpg.png}
+
+}
+
+\caption{Заполняем файл}
+
+\end{figure}%
+
+Создаем исполняемый файл и запускаем его (\autocite[рис.][]{fig:003}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{./image/5276515452723071827.jpg}
+
+}
+
+\caption{Запускаем файл и проверяем его работу}
+
+\end{figure}%
+
+Открываем файл lab8-1.asm для редактирования и изменяем его, добавив
+изменение значения регистра в цикле (\autocite[рис.][]{fig:004}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{./image/5276515452723071829.jpg}
+
+}
+
+\caption{Вносим изменения в файл}
+
+\end{figure}%
+
+Создаем исполняемый файл и запускаем его (\autocite[рис.][]{fig:005}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{./image/5276515452723071830.jpg}
+
+}
+
+\caption{Компелируем файл и смотрим на работу}
+
+\end{figure}%
+
+Регистр ecx принимает значения 9,7,5,3,1(на вход подается число 10, в
+цикле label данный регистр уменьшается на 2 командой sub и loop).
+
+Число проходов цикла не соответсвует числу N, так как уменьшается на 2.
+
+Снова открываем файл и меняем его, чтобы все корректно работало
+(\autocite[рис.][]{fig:006}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{./image/5276515452723071832.jpg}
+
+}
+
+\caption{Редактируем файл}
+
+\end{figure}%
+
+Создаем исполняемый файл и запускаем его (\autocite[рис.][]{fig:007}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{./image/5276515452723071833.jpg}
+
+}
+
+\caption{Проверяем, сошелся ли этот вывод с данным в условии}
+
+\end{figure}%
+
+В этом случае число проходов цикла равна числу N.
+
+\section{Обработка аргументов командной
+строки.}\label{ux43eux431ux440ux430ux431ux43eux442ux43aux430-ux430ux440ux433ux443ux43cux435ux43dux442ux43eux432-ux43aux43eux43cux430ux43dux434ux43dux43eux439-ux441ux442ux440ux43eux43aux438.}
+
+Создаем новый файл командой touch (\autocite[рис.][]{fig:008}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{./image/5276515452723071834.jpg}
+
+}
+
+\caption{Создание файла}
+
+\end{figure}%
+
+Открываем файл для редактирования и заполняем его в соответствии с
+листингом 8.2 (\autocite[рис.][]{fig:009}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{./image/5276515452723071835.jpg}
+
+}
+
+\caption{Заполняем файл}
+
+\end{figure}%
+
+Создаем исполняемый файл и проверяем его работу, указав аргументы
+(\autocite[рис.][]{fig:010}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{./image/5276515452723071852.jpg}
+
+}
+
+\caption{Смотрим на работу программы}
+
+\end{figure}%
+
+Програмой было обработано 3 аргумента.
+
+Создаем новый файл lab8-3.asm (\autocite[рис.][]{fig:011}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{./image/5276515452723071854.jpg}
+
+}
+
+\caption{Создаем файл командой touch}
+
+\end{figure}%
+
+Открываем файл и заполняем его в соответствии с листингом 8.3
+(\autocite[рис.][]{fig:012}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{./image/5276515452723071862.jpg}
+
+}
+
+\caption{Заполняем файл}
+
+\end{figure}%
+
+Создаём исполняемый файл и запускаем его, указав аргументы
+(\autocite[рис.][]{fig:013}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{./image/5276515452723071876.jpg}
+
+}
+
+\caption{Смотрим на работу программы}
+
+\end{figure}%
+
+Открываем этот же файл для редактирования и изменяем его, чтобы
+вычислялось произведение вводимых значений (\autocite[рис.][]{fig:014}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{./image/5276515452723071893.jpg}
+
+}
+
+\caption{Изменяем файл}
+
+\end{figure}%
+
+Создаём исполняемый файл и запускаем его, указав аргументы
+(\autocite[рис.][]{fig:015}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{./image/5276515452723071892.jpg}
+
+}
+
+\caption{Проверяем работу файла(работает правильно)}
+
+\end{figure}%
+
+\section{Задание для самостоятельной
+работы}\label{ux437ux430ux434ux430ux43dux438ux435-ux434ux43bux44f-ux441ux430ux43cux43eux441ux442ux43eux44fux442ux435ux43bux44cux43dux43eux439-ux440ux430ux431ux43eux442ux44b}
+
+ВАРИАНТ-17
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Напишите программу, которая находит сумму значений функции 𝑓(𝑥) для 𝑥
+  = 𝑥1, 𝑥2, \ldots, 𝑥𝑛, т.е. программа должна выводить значение 𝑓(𝑥1) +
+  𝑓(𝑥2) + \ldots{} + 𝑓(𝑥𝑛). Значения 𝑥𝑖 передаются как аргументы. Вид
+  функции 𝑓(𝑥) выбрать из таблицы 8.1 вариантов заданий в соответствии с
+  вариантом, полученным при выполнении лабораторной работы № 7. Создайте
+  исполняемый файл и проверьте его работу на нескольких наборах 𝑥 = 𝑥1,
+  𝑥2, \ldots, 𝑥𝑛.
+\end{enumerate}
+
+Создаем новый файл (\autocite[рис.][]{fig:016}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{./image/5276515452723071918.jpg}
+
+}
+
+\caption{Создаем файл командой touch}
+
+\end{figure}%
+
+Открываем его и пишем программу, которая выведет сумму значений,
+получившихся после решения выражения 10(x-1)
+(\autocite[рис.][]{fig:017}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{./image/5276515452723071908.jpg}
+
+}
+
+\caption{Пишем программу}
+
+\end{figure}%
+
+Транслируем файл и смотрим на работу программы
+(\autocite[рис.][]{fig:018}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{./image/5276515452723071910.jpg}
+
+}
+
+\caption{Смотрим на рабботу программы при x1=1 x2=2 x1=3 x2= 4(всё
+верно)}
+
+\end{figure}%
+
+Транслируем файл и смотрим на работу программы
+(\autocite[рис.][]{fig:019}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth,height=\textheight,keepaspectratio]{./image/5276515452723071919.jpg}
+
+}
+
+\caption{Смотрим на рабботу программы при x1=5 x2=6 x1=7 x2=8 (всё
+верно)}
+
+\end{figure}%
+
+\chapter{Выводы}\label{ux432ux44bux432ux43eux434ux44b}
+
+В ходе лабораторной работы были приобретены практические навыки
+программирования циклов на ассемблере NASM с использованием инструкции
+loop. Освоены методы обработки аргументов командной строки путем
+извлечения их значений из стека в обратном порядке. Написана программа,
+вычисляющая сумму значений функции f(x) = 10(x-1) для заданных
+аргументов. Полученные знания позволяют создавать более сложные
+программы с организацией циклических вычислений и обработкой внешних
+параметров.
+
+
+\printbibliography
+
+
+
+\end{document}
